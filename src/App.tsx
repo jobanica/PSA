@@ -20,6 +20,7 @@ import { Customers } from "./pages/staff/Customers";
 import { CustomerDetail } from "./pages/staff/CustomerDetail";
 import { Reports } from "./pages/staff/Reports";
 import { Settings } from "./pages/staff/Settings";
+import { Testimonials } from "./pages/staff/Testimonials";
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
               <Route path="customers" element={<Customers />} />
               <Route path="customers/:id" element={<CustomerDetail />} />
               <Route path="reports" element={<Reports />} />
+              <Route path="testimonials" element={<Testimonials />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

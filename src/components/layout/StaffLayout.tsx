@@ -2,7 +2,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { APP_NAME } from "../../lib/constants";
-import { Grid, Inbox, Plus, Users, ChartBar, Cog, Menu, Logout, Document } from "../icons";
+import { Grid, Inbox, Plus, Users, ChartBar, Cog, Menu, Logout, Document, Star } from "../icons";
 
 const nav = [
   { to: "/staff", label: "Dashboard", end: true, Icon: Grid },
@@ -10,6 +10,7 @@ const nav = [
   { to: "/staff/new", label: "New Order", Icon: Plus },
   { to: "/staff/customers", label: "Customers", Icon: Users },
   { to: "/staff/reports", label: "Reports", Icon: ChartBar },
+  { to: "/staff/testimonials", label: "Testimonials", Icon: Star },
   { to: "/staff/settings", label: "Settings", Icon: Cog },
 ];
 

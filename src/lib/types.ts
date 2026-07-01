@@ -113,6 +113,21 @@ export interface ScheduledMessage {
   sent_at: string | null;
 }
 
+export interface Testimonial {
+  id: string;
+  kind: "text" | "youtube" | "file";
+  quote: string | null;
+  author_name: string;
+  location: string | null;
+  stars: number;
+  youtube_id: string | null;
+  video_url: string | null;
+  poster_url: string | null;
+  active: boolean;
+  sort_order: number;
+  created_at: string;
+}
+
 // Parsed shape returned by the parse-intake Edge Function.
 export interface ParsedIntake {
   first_name: string;
