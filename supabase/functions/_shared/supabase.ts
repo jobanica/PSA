@@ -1,6 +1,6 @@
 // Service-role Supabase client for Edge Functions. NEVER expose this key to
 // the browser — it lives only in the Edge Function environment.
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 export function serviceClient() {
   const url = Deno.env.get("SUPABASE_URL")!;
