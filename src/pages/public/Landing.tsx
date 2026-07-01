@@ -6,6 +6,7 @@ import {
   ShieldCheck, Truck, ChatBubble, MagnifyingGlass, ArrowRight, Bolt,
   Document, Star, Banknotes, Check, ChevronDown,
 } from "../../components/icons";
+import { VideoTestimonials, type VideoTestimonial } from "../../components/VideoTestimonials";
 
 type IconType = (p: SVGProps<SVGSVGElement>) => React.ReactElement;
 
@@ -15,6 +16,11 @@ const CTA_LABEL = "Order My PSA Document";
 //   { quote: "Ang bilis, dumating agad sa bahay!", name: "Maria S.", location: "Davao City", stars: 5 },
 // (Kept empty so no placeholder text goes live until the owner provides real quotes.)
 const TESTIMONIALS: { quote: string; name: string; location: string; stars: number }[] = [];
+
+// VIDEO TESTIMONIALS — auto-hides while empty. Two supported forms:
+//   YouTube:      { type: "youtube", id: "dQw4w9WgXcQ", name: "Maria S.", location: "Davao City", stars: 5 }
+//   Hosted file:  { type: "file", src: "https://.../clip.mp4", poster: "https://.../thumb.jpg", name: "Juan D.", location: "Davao City" }
+const VIDEO_TESTIMONIALS: VideoTestimonial[] = [];
 
 // FAQ — items with an empty `answer` are hidden until the real copy is provided.
 // TODO(owner): fill in turnaround time, coverage area, and corrections policy.
@@ -33,6 +39,7 @@ const FAQ: { q: string; a: string }[] = [
 export function Landing() {
   const { docTypes } = useDocumentTypes();
   const faq = FAQ.filter((f) => f.a.trim());
+  const hasTestimonials = TESTIMONIALS.length > 0 || VIDEO_TESTIMONIALS.length > 0;
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
@@ -219,12 +226,20 @@ export function Landing() {
       </section>
 
       {/* testimonials */}
-      {TESTIMONIALS.length > 0 && (
+      {hasTestimonials && (
         <section className="mx-auto max-w-4xl px-5 py-14">
           <div className="mb-9 text-center">
             <h2 className="font-display text-2xl font-bold text-navy sm:text-3xl">Loved by Filipino families</h2>
-            <p className="mt-1.5 text-sm text-slate-500">Real orders, delivered nationwide.</p>
+            <p className="mt-1.5 text-sm text-slate-500">Real customers, delivered across Davao.</p>
           </div>
+
+          {VIDEO_TESTIMONIALS.length > 0 && (
+            <div className="mb-4">
+              <VideoTestimonials items={VIDEO_TESTIMONIALS} />
+            </div>
+          )}
+
+          {TESTIMONIALS.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-3">
             {TESTIMONIALS.map((t, i) => (
               <figure key={i} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5">
@@ -244,6 +259,7 @@ export function Landing() {
               </figure>
             ))}
           </div>
+          )}
         </section>
       )}
 

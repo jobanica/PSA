@@ -83,6 +83,9 @@ export const AlertTriangle = (p: IconProps) => (
 export const Sun = (p: IconProps) => (
   <Base {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></Base>
 );
+export const Play = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}><path d="M8 5.5v13l11-6.5z" /></svg>
+);
 export const ChevronDown = (p: IconProps) => (
   <Base {...p}><path d="M6 9l6 6 6-6" /></Base>
 );
