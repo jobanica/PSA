@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Print styles: hide app chrome, force black-on-white for print routes */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-page {
+    margin: 0;
+    padding: 0;
+  }
+}
