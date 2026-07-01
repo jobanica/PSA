@@ -5,15 +5,14 @@
 -- ---------------------------------------------------------------------------
 -- Seed document_types (idempotent by name)
 -- ---------------------------------------------------------------------------
+create unique index if not exists document_types_name_key on document_types (name);
+
 insert into document_types (name, base_fee, psa_cost, active, sort_order) values
   ('PSA Birth Certificate',    685, 205, true, 1),
   ('PSA Marriage Certificate', 685, 205, true, 2),
   ('PSA Death Certificate',    685, 205, true, 3),
   ('CENOMAR / NOR',            750, 255, true, 4)
-on conflict do nothing;
-
--- Guard: if names already existed we still want them present. Use a name
--- uniqueness backfill only when table was empty (above insert handles fresh db).
+on conflict (name) do nothing;
 
 -- ---------------------------------------------------------------------------
 -- Seed settings (idempotent)

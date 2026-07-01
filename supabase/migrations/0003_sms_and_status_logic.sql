@@ -96,7 +96,7 @@ begin
 
   insert into scheduled_messages (order_id, phone, body, kind, send_at, dedupe_key)
   values (p_order_id, v_phone, v_body, p_kind, p_send_at, p_dedupe)
-  on conflict (dedupe_key) do nothing;
+  on conflict (dedupe_key) where dedupe_key is not null do nothing;
 end $$;
 
 -- ---------------------------------------------------------------------------
