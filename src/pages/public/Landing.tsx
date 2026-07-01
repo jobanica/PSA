@@ -9,6 +9,14 @@ import {
 
 type IconType = (p: SVGProps<SVGSVGElement>) => React.ReactElement;
 
+// ⚠️ PLACEHOLDER TESTIMONIALS — replace `quote`, `name`, `location`, `stars`
+// with the real ones. The section auto-hides if this array is empty.
+const TESTIMONIALS: { quote: string; name: string; location: string; stars: number }[] = [
+  { quote: "Ang bilis! Na-order ko lang online, dumating agad sa bahay. Sobrang convenient.", name: "Placeholder Name", location: "Quezon City", stars: 5 },
+  { quote: "Legit at maaasahan. COD pa, kaya walang risk. Salamat sa updates via SMS!", name: "Placeholder Name", location: "Cebu City", stars: 5 },
+  { quote: "Hindi na ko kailangan pumila sa PSA. Worth every peso, super smooth ng process.", name: "Placeholder Name", location: "Davao City", stars: 5 },
+];
+
 // Ad landing page (route "/"). Conversion-focused, mobile-first — the Facebook
 // ad destination. Navy hero + amber CTA, block sections, SVG icons.
 export function Landing() {
@@ -159,6 +167,37 @@ export function Landing() {
           })}
         </div>
       </section>
+
+      {/* testimonials */}
+      {TESTIMONIALS.length > 0 && (
+        <section className="border-t border-slate-100 bg-slate-50 py-14">
+          <div className="mx-auto max-w-4xl px-5">
+            <div className="mb-9 text-center">
+              <h2 className="font-display text-2xl font-bold text-navy sm:text-3xl">Loved by Filipino families</h2>
+              <p className="mt-1.5 text-sm text-slate-500">Real orders, delivered nationwide.</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {TESTIMONIALS.map((t, i) => (
+                <figure key={i} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5">
+                  <div className="mb-3 flex text-amber-500" aria-label={`${t.stars} out of 5 stars`}>
+                    {Array.from({ length: t.stars }).map((_, s) => <Star key={s} className="h-4 w-4" />)}
+                  </div>
+                  <blockquote className="flex-1 text-sm leading-relaxed text-slate-700">“{t.quote}”</blockquote>
+                  <figcaption className="mt-4 flex items-center gap-3 border-t border-slate-100 pt-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                      {t.name.trim().charAt(0).toUpperCase()}
+                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-navy">{t.name}</div>
+                      <div className="text-xs text-slate-400">{t.location}</div>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* final CTA */}
       <section className="px-5 pb-24 sm:pb-14">
