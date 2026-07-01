@@ -83,6 +83,12 @@ export const AlertTriangle = (p: IconProps) => (
 export const Sun = (p: IconProps) => (
   <Base {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" /></Base>
 );
+export const ChevronDown = (p: IconProps) => (
+  <Base {...p}><path d="M6 9l6 6 6-6" /></Base>
+);
+export const Bolt = (p: IconProps) => (
+  <Base {...p}><path d="M13 3L5 13h6l-2 8 8-10h-6z" /></Base>
+);
 export const PackageCheck = (p: IconProps) => (
   <Base {...p}><path d="M12 3l8 4-8 4-8-4 8-4z" /><path d="M4 7v9l8 4 8-4V7" /><path d="M9.5 13l1.75 1.75L15 11" /></Base>
 );
