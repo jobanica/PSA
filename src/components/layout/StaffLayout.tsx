@@ -2,14 +2,15 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { APP_NAME } from "../../lib/constants";
+import { Grid, Inbox, Plus, Users, ChartBar, Cog, Menu, Logout, Document } from "../icons";
 
 const nav = [
-  { to: "/staff", label: "Dashboard", end: true, icon: "▦" },
-  { to: "/staff/orders", label: "Orders", icon: "▤" },
-  { to: "/staff/new", label: "New Order", icon: "＋" },
-  { to: "/staff/customers", label: "Customers", icon: "◍" },
-  { to: "/staff/reports", label: "Reports", icon: "▲" },
-  { to: "/staff/settings", label: "Settings", icon: "⚙" },
+  { to: "/staff", label: "Dashboard", end: true, Icon: Grid },
+  { to: "/staff/orders", label: "Orders", Icon: Inbox },
+  { to: "/staff/new", label: "New Order", Icon: Plus },
+  { to: "/staff/customers", label: "Customers", Icon: Users },
+  { to: "/staff/reports", label: "Reports", Icon: ChartBar },
+  { to: "/staff/settings", label: "Settings", Icon: Cog },
 ];
 
 export function StaffLayout() {
@@ -26,9 +27,14 @@ export function StaffLayout() {
     <div className="min-h-screen bg-slate-50 text-slate-800">
       {/* top bar (mobile) */}
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 sm:hidden">
-        <span className="font-bold text-indigo-700">{APP_NAME}</span>
-        <button onClick={() => setOpen((o) => !o)} className="rounded p-2 text-slate-600" aria-label="Menu">
-          ☰
+        <span className="flex items-center gap-2 font-display font-bold text-navy">
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-600 text-white">
+            <Document className="h-3.5 w-3.5" />
+          </span>
+          {APP_NAME}
+        </span>
+        <button onClick={() => setOpen((o) => !o)} className="rounded-lg p-2 text-slate-600 hover:bg-slate-100" aria-label="Menu">
+          <Menu className="h-5 w-5" />
         </button>
       </header>
 
@@ -40,42 +46,49 @@ export function StaffLayout() {
             (open ? "translate-x-0" : "-translate-x-full")
           }
         >
-          <div className="hidden px-5 py-4 sm:block">
-            <span className="text-lg font-bold text-indigo-700">{APP_NAME}</span>
-            <p className="text-xs text-slate-400">Operations</p>
+          <div className="hidden items-center gap-2.5 px-5 py-5 sm:flex">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-white">
+              <Document className="h-5 w-5" />
+            </span>
+            <div>
+              <div className="font-display text-base font-bold leading-tight text-navy">{APP_NAME}</div>
+              <div className="text-xs text-slate-400">Operations</div>
+            </div>
           </div>
           <nav className="flex flex-col gap-1 p-3">
-            {nav.map((n) => (
+            {nav.map(({ to, label, end, Icon }) => (
               <NavLink
-                key={n.to}
-                to={n.to}
-                end={n.end}
+                key={to}
+                to={to}
+                end={end}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium " +
-                  (isActive ? "bg-indigo-50 text-indigo-700" : "text-slate-600 hover:bg-slate-100")
+                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition " +
+                  (isActive
+                    ? "bg-brand-50 text-brand-700"
+                    : "text-slate-600 hover:bg-slate-100")
                 }
               >
-                <span className="w-4 text-center">{n.icon}</span>
-                {n.label}
+                <Icon className="h-5 w-5" />
+                {label}
               </NavLink>
             ))}
           </nav>
           <div className="p-3">
             <button
               onClick={handleSignOut}
-              className="w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium text-slate-500 hover:bg-slate-100"
+              className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-500 hover:bg-slate-100"
             >
-              Sign out
+              <Logout className="h-5 w-5" /> Sign out
             </button>
           </div>
         </aside>
 
         {open && (
-          <div className="fixed inset-0 z-30 bg-black/20 sm:hidden" onClick={() => setOpen(false)} />
+          <div className="fixed inset-0 z-30 bg-navy/30 sm:hidden" onClick={() => setOpen(false)} />
         )}
 
-        <main className="min-w-0 flex-1 p-4 sm:p-6">
+        <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>
